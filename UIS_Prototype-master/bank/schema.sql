@@ -27,6 +27,11 @@ CREATE TABLE IF NOT EXISTS Accounts(
 	CPR_number integer  REFERENCES Customers(CPR_number)
 );
 
+CREATE TABLE IF NOT EXISTS Accounts2(
+	account_number SERIAL PRIMARY KEY,
+	created_date date,
+	CPR_number integer  REFERENCES Customers(CPR_number)
+);
 
 CREATE TABLE IF NOT EXISTS manages(
 	emp_cpr_number INTEGER NOT NULL REFERENCES employees(id),
