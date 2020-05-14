@@ -25,7 +25,7 @@ Gå til din klonede UIS_prototype-master/bank mappe i terminalen.
 
 Fetch og pull de seneste ændringer fra github.
 
-Kør herefter følgende (hvor <username> self. erstattes af dit brugernavn):
+Kør herefter følgende (hvor \<username\> self. erstattes af dit brugernavn):
 
 >psql -d bank -U \<username> -f schema.sql 
 
