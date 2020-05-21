@@ -109,3 +109,58 @@ SELECT i.account_number, a.cpr_number, a.created_date
     JOIN accounts a ON i.account_number = a.account_number
     JOIN certificates_of_deposit cd ON i.account_number = cd.account_number   
 GROUP BY  i.account_number, a.cpr_number, a.created_date;
+
+--########
+CREATE TABLE IF NOT EXISTS MinSP(
+    versions_id SERIAL PRIMARY KEY
+);
+
+CREATE TABLE IF NOT EXISTS Profil(
+    cpr_nr SERIAL PRIMARY KEY,
+    fornavn varchar,
+	efternavn varchar,
+	e_mail varchar
+);
+
+CREATE TABLE IF NOT EXISTS Proevesvar(
+    cpr_nr INTEGER REFERENCES Profil(cpr_nr),
+    proevesvar_id SERIAL PRIMARY KEY,
+    dato integer,
+    afdeling text,
+    resultat text
+);
+
+CREATE TABLE IF NOT EXISTS Aftaler(
+    aftale_id SERIAL PRIMARY KEY,
+    cpr_nummer INTEGER REFERENCES Profil(cpr_nr),
+    dato date,
+    afdeling text
+);
+
+CREATE TABLE IF NOT EXISTS Meddelelser(
+    dato integer,
+    afdeling text ,
+    medd_id SERIAL PRIMARY KEY,
+    afsender text,
+    modtager text
+);
+
+CREATE TABLE IF NOT EXISTS Journalnotater(
+    cpr_nr INTEGER REFERENCES Profil(cpr_nr),
+    notat_id SERIAL PRIMARY KEY
+);
+
+CREATE TABLE IF NOT EXISTS Diagnoser_allergier(
+    diagnose_id SERIAL PRIMARY KEY,
+    cpr_nr INTEGER REFERENCES Profil(cpr_nr),
+    dato integer,
+    indsigelse boolean,
+    diagnose_allergi_navn text
+);
+
+CREATE TABLE IF NOT EXISTS Indsigelser(
+    indsigelses_id SERIAL PRIMARY KEY,
+    diagnose_id INTEGER REFERENCES diagnoser_allergier(diagnose_id),
+    dato date,
+    indsigelses_tekst text
+);
