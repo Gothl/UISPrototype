@@ -127,7 +127,7 @@ def select_profil(CPR_number):                   # selects a specific Customer, 
     cur = conn.cursor()                             # same process, except...
     sql = """
     SELECT * FROM Profiler
-    WHERE CPR_number = %s
+    WHERE cpr_nr = %s
     """
     cur.execute(sql, (CPR_number,))                 # ... after execution the changes are not committed, but instead used in the statement below
     user = Profiler(cur.fetchone()) if cur.rowcount > 0 else None;     # sets 'user' to the customer matching the cpr-number (if any), else user = None.
