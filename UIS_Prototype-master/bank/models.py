@@ -53,7 +53,7 @@ class Diagnoser_allergier(tuple):
         self.indsigelse = user_data[3]
         self.diagnose_allergi_navn = user_data[4]
 
-class indsigelser(tuple):
+class Indsigelser(tuple):
     def __init__(self, user_data)
 
         self.indsigelses_id = user_data[0]
@@ -123,7 +123,7 @@ def insert_Customers(name, CPR_number, password):   # inserts a Customer with va
     conn.commit()                                   # commit() commits any pending transactions to the db. Without it changes would be lost.
     cur.close()                                     # closes the cursor, making it unusable from this point on.
 
-def select_profile(CPR_number):                   # selects a specific Customer, based on their cpr-number
+def select_profil(CPR_number):                   # selects a specific Customer, based on their cpr-number
     cur = conn.cursor()                             # same process, except...
     sql = """
     SELECT * FROM Profiler

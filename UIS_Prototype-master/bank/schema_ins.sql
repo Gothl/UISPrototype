@@ -104,16 +104,16 @@ INSERT INTO public.certificates_of_deposit(start_date, amount, maturity_date,acc
 INSERT INTO public.certificates_of_deposit(cd_number, start_date, amount, maturity_date,account_number, rate) VALUES (7001, now(), 10000, now(),8012, 5);
 
 --
-DELETE FROM public.profil;
+DELETE FROM public.profiler;
 DELETE FROM public.diagnoser_allergier;
 DELETE FROM public.indsigelser;
 
 -- Oprettelse af profil (skal ikke kunn oprettes på hjemmesiden - skal være oprettet på forhånd grundet cpr.)
-INSERT INTO public.profil(cpr_nr, fornavn, efternavn, e_mail) VALUES (1234567890, 'Bonnie', 'Byggemand', 'BonnieByg@gmail.com');
-INSERT INTO public.profil(cpr_nr, fornavn, efternavn, e_mail) VALUES (1234567891, 'Bob', 'Byggemand', 'Bob@byggebob.com');
-INSERT INTO public.profil(cpr_nr, fornavn, efternavn, e_mail) VALUES (1234567892, 'Britta', 'Bobbelop', 'Britta50@gmail.com');
-INSERT INTO public.profil(cpr_nr, fornavn, efternavn, e_mail) VALUES (1234567893, 'Ken', 'Plastik', 'kenPlast@gmail.com');
-INSERT INTO public.profil(cpr_nr, fornavn, efternavn, e_mail) VALUES (1234567894, 'Barbie', 'Plastik', 'BarbieQueeeen@gmail.com');
+INSERT INTO public.profiler(cpr_nr, fornavn, efternavn, e_mail) VALUES (1234567890, 'Bonnie', 'Byggemand', 'BonnieByg@gmail.com');
+INSERT INTO public.profiler(cpr_nr, fornavn, efternavn, e_mail) VALUES (1234567891, 'Bob', 'Byggemand', 'Bob@byggebob.com');
+INSERT INTO public.profiler(cpr_nr, fornavn, efternavn, e_mail) VALUES (1234567892, 'Britta', 'Bobbelop', 'Britta50@gmail.com');
+INSERT INTO public.profiler(cpr_nr, fornavn, efternavn, e_mail) VALUES (1234567893, 'Ken', 'Plastik', 'kenPlast@gmail.com');
+INSERT INTO public.profiler(cpr_nr, fornavn, efternavn, e_mail) VALUES (1234567894, 'Barbie', 'Plastik', 'BarbieQueeeen@gmail.com');
 
 --Diagnoser
 INSERT INTO public.diagnoser_allergier(diagnose_id, cpr_nr, dato, indsigelse, diagnose_allergi_navn) VALUES (78903, 1234567890, '2020-05-15', FALSE, 'COVID-19');
@@ -137,4 +137,3 @@ INSERT INTO public.diagnoser_allergier(diagnose_id, cpr_nr, dato, indsigelse, di
 --Indsigelser
 INSERT INTO public.indsigelser(diagnose_id, dato, indsigelses_tekst) VALUES (78901, now(), 'Jeg er uforstående overfor min diagnose - ret venligst dette.');
 INSERT INTO public.indsigelser(diagnose_id, dato, indsigelses_tekst) VALUES (78912, now(), 'Jeg er uforstående overfor min diagnose - ret venligst dette.');
-
