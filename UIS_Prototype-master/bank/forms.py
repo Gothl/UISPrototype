@@ -9,6 +9,23 @@ class AddCustomerForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Add')
 
+class AddProfilForm(FlaskForm):
+    username = StringField('Username',
+                           validators=[DataRequired(), Length(min=2, max=20)])
+    CPR_number = IntegerField('cpr_nr',
+                        validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    submit = SubmitField('Bekræft')
+
+class ProfilLoginForm(FlaskForm):
+    id = IntegerField('cpr_nr', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    remember = BooleanField('Husk mig')
+    submit = SubmitField('Login')
+
+class IndsigelsesForm(FlaskForm):
+    indsigelse = StringField('Indsigelse:', validators=[DataRequired(), Length(min=2, max=500)])
+    submit = SubmitField('Indsend')
 
 class CustomerLoginForm(FlaskForm):
     id = IntegerField('CPR_number', validators=[DataRequired()])
