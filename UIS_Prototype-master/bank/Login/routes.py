@@ -36,7 +36,7 @@ def login():
             return redirect(next_page) if next_page else redirect(url_for('Login.home'))
         else:
             flash('Login Unsuccessful. Please check identifier and password', 'danger')
-    return render_template('login.html', title='Login', TRUE, form=form)
+    return render_template('login.html', title='Login', form=form)
 
 
 @Login.route("/logout")
