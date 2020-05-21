@@ -2,7 +2,7 @@ from flask import render_template, url_for, flash, redirect, request, Blueprint
 from bank import app, conn, bcrypt
 from bank.forms import ProfilLoginForm
 from flask_login import login_user, current_user, logout_user, login_required
-from bank.models import select_profil
+from bank.models import Profil, select_profil
 
 Login = Blueprint('Login', __name__)
 

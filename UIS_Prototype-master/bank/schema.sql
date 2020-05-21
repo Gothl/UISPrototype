@@ -111,6 +111,7 @@ CREATE TABLE IF NOT EXISTS MinSP(
 
 CREATE TABLE IF NOT EXISTS Profiler(
     cpr_nr INTEGER PRIMARY KEY,
+    password varchar(120),
     fornavn varchar,
 	efternavn varchar,
 	e_mail varchar

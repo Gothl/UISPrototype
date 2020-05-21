@@ -109,11 +109,11 @@ DELETE FROM public.diagnoser_allergier;
 DELETE FROM public.indsigelser;
 
 -- Oprettelse af profil (skal ikke kunn oprettes på hjemmesiden - skal være oprettet på forhånd grundet cpr.)
-INSERT INTO public.profiler(cpr_nr, fornavn, efternavn, e_mail) VALUES (1234567890, 'Bonnie', 'Byggemand', 'BonnieByg@gmail.com');
-INSERT INTO public.profiler(cpr_nr, fornavn, efternavn, e_mail) VALUES (1234567891, 'Bob', 'Byggemand', 'Bob@byggebob.com');
-INSERT INTO public.profiler(cpr_nr, fornavn, efternavn, e_mail) VALUES (1234567892, 'Britta', 'Bobbelop', 'Britta50@gmail.com');
-INSERT INTO public.profiler(cpr_nr, fornavn, efternavn, e_mail) VALUES (1234567893, 'Ken', 'Plastik', 'kenPlast@gmail.com');
-INSERT INTO public.profiler(cpr_nr, fornavn, efternavn, e_mail) VALUES (1234567894, 'Barbie', 'Plastik', 'BarbieQueeeen@gmail.com');
+INSERT INTO public.profiler(cpr_nr, password, fornavn, efternavn, e_mail) VALUES (1234567890, '$2b$12$KFkp1IEMGT4QrWwjPGhE3ejOv6Z3pYhx/S4qOoFbanR2sMiZqgeJO','Bonnie', 'Byggemand', 'BonnieByg@gmail.com');
+INSERT INTO public.profiler(cpr_nr, password, fornavn, efternavn, e_mail) VALUES (1234567891, '$2b$12$KFkp1IEMGT4QrWwjPGhE3ejOv6Z3pYhx/S4qOoFbanR2sMiZqgeJO', 'Bob', 'Byggemand', 'Bob@byggebob.com');
+INSERT INTO public.profiler(cpr_nr, password, fornavn, efternavn, e_mail) VALUES (1234567892, '$2b$12$KFkp1IEMGT4QrWwjPGhE3ejOv6Z3pYhx/S4qOoFbanR2sMiZqgeJO', 'Britta', 'Bobbelop', 'Britta50@gmail.com');
+INSERT INTO public.profiler(cpr_nr, password, fornavn, efternavn, e_mail) VALUES (1234567893, '$2b$12$KFkp1IEMGT4QrWwjPGhE3ejOv6Z3pYhx/S4qOoFbanR2sMiZqgeJO', 'Ken', 'Plastik', 'kenPlast@gmail.com');
+INSERT INTO public.profiler(cpr_nr, password, fornavn, efternavn, e_mail) VALUES (1234567894, '$2b$12$KFkp1IEMGT4QrWwjPGhE3ejOv6Z3pYhx/S4qOoFbanR2sMiZqgeJO', 'Barbie', 'Plastik', 'BarbieQueeeen@gmail.com');
 
 --Diagnoser
 INSERT INTO public.diagnoser_allergier(diagnose_id, cpr_nr, dato, indsigelse, diagnose_allergi_navn) VALUES (78903, 1234567890, '2020-05-15', FALSE, 'COVID-19');
