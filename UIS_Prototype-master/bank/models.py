@@ -12,7 +12,7 @@ from psycopg2 import sql                    # A module that contains objects and
 def load_user(user_id):
     cur = conn.cursor()
 
-    schema = 'Profil'                # assuming that the user_id belongs to a customer, to start with
+    schema = 'Profiler'                # assuming that the user_id belongs to a customer, to start with
     id = 'cpr_nr'                   # id of the customer will be the 'cpr_number' key attribute
     #if str(user_id).startswith('60'):   # if user_id starts with '60' then it's an employees, logging in.
     #    schema = 'patienter'            # change to patients schema
@@ -103,13 +103,13 @@ class Transfers(tuple):                         # same proces - instantiating a 
         self.amount = user_data[1]
         self.transfer_date = user_data[2]
 
-def opret_indsigelse(diagnose_id, cpr_nr, indsigelses_tekst):
+def opret_indsigelse(indsigelses_id, diagnose_id, dato, indsigelses_tekst):
     cur = conn.cursor()
     sql = """
-    INSERT INTO Indsigelser(diagnose_id, cpr_nr, indsigelses_tekst)
-    VALUES (%s, %s, %s)
+    INSERT INTO Indsigelser(indsigelses_id, diagnose_id, dato, indsigelses_tekst)
+    VALUES (%s, %s, %s, %s)
     """
-    cur.execute(sql, (diagnose_id, cpr_nr, indsigelses_tekst))  # executing the query 'sql'
+    cur.execute(sql, (indsigelses_id, diagnose_id, dato, indsigelses_tekst))  # executing the query 'sql'
     conn.commit()                                   # commit() commits any pending transactions to the db. Without it changes would be lost.
     cur.close()
 
@@ -123,13 +123,13 @@ def insert_Customers(name, CPR_number, password):   # inserts a Customer with va
     conn.commit()                                   # commit() commits any pending transactions to the db. Without it changes would be lost.
     cur.close()                                     # closes the cursor, making it unusable from this point on.
 
-def select_profil(CPR_number):                   # selects a specific Customer, based on their cpr-number
+def select_profil(cpr_nr):                   # selects a specific Customer, based on their cpr-number
     cur = conn.cursor()                             # same process, except...
     sql = """
     SELECT * FROM Profiler
     WHERE cpr_nr = %s
     """
-    cur.execute(sql, (CPR_number,))                 # ... after execution the changes are not committed, but instead used in the statement below
+    cur.execute(sql, (cpr_nr,))                 # ... after execution the changes are not committed, but instead used in the statement below
     user = Profiler(cur.fetchone()) if cur.rowcount > 0 else None;     # sets 'user' to the customer matching the cpr-number (if any), else user = None.
     cur.close()
     return user                                     # this is self-explanatory
