@@ -112,8 +112,8 @@ CREATE TABLE IF NOT EXISTS MinSP(
 CREATE TABLE IF NOT EXISTS Profiler(
     cpr_nr SERIAL PRIMARY KEY,
     fornavn varchar,
-		efternavn varchar,
-		e_mail varchar
+	efternavn varchar,
+	e_mail varchar
 );
 
 CREATE TABLE IF NOT EXISTS Proevesvar(
