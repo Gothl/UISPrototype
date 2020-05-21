@@ -125,7 +125,7 @@ INSERT INTO public.diagnoser_allergier(diagnose_id, cpr_nr, dato, indsigelse, di
 
 INSERT INTO public.diagnoser_allergier(diagnose_id, cpr_nr, dato, indsigelse, diagnose_allergi_navn) VALUES (78923, 1234567892, '2020-05-02', FALSE, 'Diskusprolaps');
 INSERT INTO public.diagnoser_allergier(diagnose_id, cpr_nr, dato, indsigelse, diagnose_allergi_navn) VALUES (78921, 1234567892, '2018-04-02', FALSE, 'Ledgigt');
-INSERT INTO public.diagnoser_allergier(diagnose_id, cpr_nr, dato, indsigelse, diagnose_allergi_navn) VALUES (78922, 1234567892, '2019-03-00', FALSE, 'Grå stær');
+INSERT INTO public.diagnoser_allergier(diagnose_id, cpr_nr, dato, indsigelse, diagnose_allergi_navn) VALUES (78922, 1234567892, '2019-03-01', FALSE, 'Grå stær');
 
 INSERT INTO public.diagnoser_allergier(diagnose_id, cpr_nr, dato, indsigelse, diagnose_allergi_navn) VALUES (78932, 1234567893, '2020-04-01', FALSE, 'Diabetes 2');
 INSERT INTO public.diagnoser_allergier(diagnose_id, cpr_nr, dato, indsigelse, diagnose_allergi_navn) VALUES (78931, 1234567893, '2020-03-01', FALSE, 'Slidgigt');
