@@ -12,11 +12,11 @@ from psycopg2 import sql                    # A module that contains objects and
 def load_user(user_id):
     cur = conn.cursor()
 
-    schema = 'customers'                # assuming that the user_id belongs to a customer, to start with
-    id = 'cpr_number'                   # id of the customer will be the 'cpr_number' key attribute
-    if str(user_id).startswith('60'):   # if user_id starts with '60' then it's an employees, logging in.
-        schema = 'employees'            # change to patients schema
-        id = 'id'                       # can still be id, but cpr would be more descriptive/accurate.
+    schema = 'Profil'                # assuming that the user_id belongs to a customer, to start with
+    id = 'cpr_nr'                   # id of the customer will be the 'cpr_number' key attribute
+    #if str(user_id).startswith('60'):   # if user_id starts with '60' then it's an employees, logging in.
+    #    schema = 'patienter'            # change to patients schema
+    #    id = 'id'                       # can still be id, but cpr would be more descriptive/accurate.
 
     # user_sql = SELECT * FROM 'customers/employees' WHERE 'cpr_number' = %s
     # the triple-quotes are a way to allow the query to be written using multiple lines. With single-quotes the query needs to be on one line.
@@ -30,9 +30,36 @@ def load_user(user_id):
     if cur.rowcount > 0:                        # if the query returns at least one row.
         # return an Employee (se class below) if schema=='employees' else return a customer.
         # fetchone returns the next row of the result
-        return Employees(cur.fetchone()) if schema == 'employees' else Customers(cur.fetchone())
+        return Profil(cur.fetchone())
     else:
         return None                             # if the command returns 0 rows.
+class Profil(tuple, UserMixin):
+    def __init__(self, user_data):
+
+        self.cpr_nr = user_data[0]
+        self.fornavn = user_data[1]
+        self.efternavn = user_data[2]
+        self.mail = user_data[3]
+
+    def get_id(self):                           # defines/overrides a get func that returns the customer's cpr_number
+       return (self.cpr_nr)
+
+class Diagnoser_allergier(tuple):
+    def __init__(self, user_data):
+
+        self.diagnose_id = user_data[0]
+        self.cpr_nr = user_data[1]
+        self.dato = user_data[2]
+        self.indsigelse = user_data[3]
+        self.diagnose_allergi_navn = user_data[4]
+
+class indsigelser(tuple):
+    def __init__(self, user_data)
+
+        self.indsigelses_id = user_data[0]
+        self.diagnose_id = user_data[1]
+        self.dato = user_data[2]
+        self.indsigelses_tekst = user_data[3]
 
 
 class Customers(tuple, UserMixin):              # class Customer takes a tuple (a row from a query result), and the UserMixin funcs.
@@ -75,6 +102,16 @@ class Transfers(tuple):                         # same proces - instantiating a 
         self.id = user_data[0]
         self.amount = user_data[1]
         self.transfer_date = user_data[2]
+
+def opret_indsigelse(diagnose_id, cpr_nr, indsigelses_tekst):
+    cur = conn.cursor()   
+    sql = """
+    INSERT INTO Indsigelser(diagnose_id, cpr_nr, indsigelses_tekst)
+    VALUES (%s, %s, %s)
+    """
+    cur.execute(sql, (diagnose_id, cpr_nr, indsigelses_tekst))  # executing the query 'sql'
+    conn.commit()                                   # commit() commits any pending transactions to the db. Without it changes would be lost.
+    cur.close()  
 
 def insert_Customers(name, CPR_number, password):   # inserts a Customer with values of name, CPR_number, password into the Customers table
     cur = conn.cursor()                             # creates a cursor for the execution of the following sql query
