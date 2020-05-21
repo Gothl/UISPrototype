@@ -65,10 +65,10 @@ INSERT INTO public.manages(emp_cpr_number, account_number) VALUES (6007, 8015);
 
 
 
-INSERT INTO checkingaccounts(account_number) 
+INSERT INTO checkingaccounts(account_number)
 VALUES (8000),(8001),(8002),(8003),(8004),(8005),(8006),(8007);
 
-INSERT INTO InvestmentAccounts(account_number) 
+INSERT INTO InvestmentAccounts(account_number)
 VALUES (8008),(8009),(8010),(8011),(8012),(8013),(8014),(8015);
 
 -- contraints missing on transfers
@@ -103,4 +103,38 @@ INSERT INTO public.certificates_of_deposit(start_date, amount, maturity_date,acc
 -- cd_number given fixed rate 5 percent
 INSERT INTO public.certificates_of_deposit(cd_number, start_date, amount, maturity_date,account_number, rate) VALUES (7001, now(), 10000, now(),8012, 5);
 
+--
+DELETE FROM public.profil;
+DELETE FROM public.diagnoser_allergier;
+DELETE FROM public.indsigelser;
+
+-- Oprettelse af profil (skal ikke kunn oprettes på hjemmesiden - skal være oprettet på forhånd grundet cpr.)
+INSERT INTO public.profil(cpr_nr, fornavn, efternavn, e_mail) VALUES (1234567890, 'Bonnie', 'Byggemand', 'BonnieByg@gmail.com');
+INSERT INTO public.profil(cpr_nr, fornavn, efternavn, e_mail) VALUES (1234567891, 'Bob', 'Byggemand', 'Bob@byggebob.com');
+INSERT INTO public.profil(cpr_nr, fornavn, efternavn, e_mail) VALUES (1234567892, 'Britta', 'Bobbelop', 'Britta50@gmail.com');
+INSERT INTO public.profil(cpr_nr, fornavn, efternavn, e_mail) VALUES (1234567893, 'Ken', 'Plastik', 'kenPlast@gmail.com');
+INSERT INTO public.profil(cpr_nr, fornavn, efternavn, e_mail) VALUES (1234567894, 'Barbie', 'Plastik', 'BarbieQueeeen@gmail.com');
+
+--Diagnoser
+INSERT INTO public.diagnoser_allergier(diagnose_id, cpr_nr, dato, indsigelse, diagnose_allergi_navn) VALUES (78903, 1234567890, '2020-05-15', FALSE, 'COVID-19');
+INSERT INTO public.diagnoser_allergier(diagnose_id, cpr_nr, dato, indsigelse, diagnose_allergi_navn) VALUES (78901, 1234567890, '2020-04-01', TRUE, 'Forhøjet blodtryk');
+INSERT INTO public.diagnoser_allergier(diagnose_id, cpr_nr, dato, indsigelse, diagnose_allergi_navn) VALUES (78902, 1234567890, '2020-05-01', FALSE, 'Slidgigt');
+
+INSERT INTO public.diagnoser_allergier(diagnose_id, cpr_nr, dato, indsigelse, diagnose_allergi_navn) VALUES (78911, 1234567891, '2019-03-01', FALSE, 'Grå Stær');
+INSERT INTO public.diagnoser_allergier(diagnose_id, cpr_nr, dato, indsigelse, diagnose_allergi_navn) VALUES (78912, 1234567891, '2020-04-01', TRUE, 'Alkoholisme');
+
+INSERT INTO public.diagnoser_allergier(diagnose_id, cpr_nr, dato, indsigelse, diagnose_allergi_navn) VALUES (78923, 1234567892, '2020-05-02', FALSE, 'Diskusprolaps');
+INSERT INTO public.diagnoser_allergier(diagnose_id, cpr_nr, dato, indsigelse, diagnose_allergi_navn) VALUES (78921, 1234567892, '2018-04-02', FALSE, 'Ledgigt');
+INSERT INTO public.diagnoser_allergier(diagnose_id, cpr_nr, dato, indsigelse, diagnose_allergi_navn) VALUES (78922, 1234567892, '2019-03-00', FALSE, 'Grå stær');
+
+INSERT INTO public.diagnoser_allergier(diagnose_id, cpr_nr, dato, indsigelse, diagnose_allergi_navn) VALUES (78932, 1234567893, '2020-04-01', FALSE, 'Diabetes 2');
+INSERT INTO public.diagnoser_allergier(diagnose_id, cpr_nr, dato, indsigelse, diagnose_allergi_navn) VALUES (78931, 1234567893, '2020-03-01', FALSE, 'Slidgigt');
+
+INSERT INTO public.diagnoser_allergier(diagnose_id, cpr_nr, dato, indsigelse, diagnose_allergi_navn) VALUES (78942, 1234567894, '2020-04-15', FALSE, 'Slidgigt');
+INSERT INTO public.diagnoser_allergier(diagnose_id, cpr_nr, dato, indsigelse, diagnose_allergi_navn) VALUES (78943, 1234567894, '2020-05-15', FALSE, 'COVID-19');
+INSERT INTO public.diagnoser_allergier(diagnose_id, cpr_nr, dato, indsigelse, diagnose_allergi_navn) VALUES (78941, 1234567894, '2020-03-15', FALSE, 'Ledgigt');
+
+--Indsigelser
+INSERT INTO public.indsigelser(diagnose_id, dato, indsigelses_tekst) VALUES (78901, now(), 'Jeg er uforstående overfor min diagnose - ret venligst dette.');
+INSERT INTO public.indsigelser(diagnose_id, dato, indsigelses_tekst) VALUES (78912, now(), 'Jeg er uforstående overfor min diagnose - ret venligst dette.');
 
