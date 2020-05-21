@@ -104,14 +104,14 @@ class Transfers(tuple):                         # same proces - instantiating a 
         self.transfer_date = user_data[2]
 
 def opret_indsigelse(diagnose_id, cpr_nr, indsigelses_tekst):
-    cur = conn.cursor()   
+    cur = conn.cursor()
     sql = """
     INSERT INTO Indsigelser(diagnose_id, cpr_nr, indsigelses_tekst)
     VALUES (%s, %s, %s)
     """
     cur.execute(sql, (diagnose_id, cpr_nr, indsigelses_tekst))  # executing the query 'sql'
     conn.commit()                                   # commit() commits any pending transactions to the db. Without it changes would be lost.
-    cur.close()  
+    cur.close()
 
 def insert_Customers(name, CPR_number, password):   # inserts a Customer with values of name, CPR_number, password into the Customers table
     cur = conn.cursor()                             # creates a cursor for the execution of the following sql query
@@ -123,14 +123,14 @@ def insert_Customers(name, CPR_number, password):   # inserts a Customer with va
     conn.commit()                                   # commit() commits any pending transactions to the db. Without it changes would be lost.
     cur.close()                                     # closes the cursor, making it unusable from this point on.
 
-def select_Customers(CPR_number):                   # selects a specific Customer, based on their cpr-number
+def select_profile(CPR_number):                   # selects a specific Customer, based on their cpr-number
     cur = conn.cursor()                             # same process, except...
     sql = """
-    SELECT * FROM Customers
+    SELECT * FROM Profiler
     WHERE CPR_number = %s
     """
     cur.execute(sql, (CPR_number,))                 # ... after execution the changes are not committed, but instead used in the statement below
-    user = Customers(cur.fetchone()) if cur.rowcount > 0 else None;     # sets 'user' to the customer matching the cpr-number (if any), else user = None.
+    user = Profiler(cur.fetchone()) if cur.rowcount > 0 else None;     # sets 'user' to the customer matching the cpr-number (if any), else user = None.
     cur.close()
     return user                                     # this is self-explanatory
 
@@ -151,11 +151,11 @@ def update_CheckingAccount(amount, CPR_number):     # updates the amount in a Ch
     UPDATE CheckingAccount
     SET amount = %s
     WHERE CPR_number = %s
-    """ 
+    """
     cur.execute(sql, (amount, CPR_number))
     conn.commit()
     cur.close()
-    
+
 def transfer_account(date, amount, from_account, to_account):   # inserts transfer into Transfers - same process as with insert_customers()
     cur = conn.cursor()
     sql = """
@@ -172,14 +172,14 @@ def select_emp_cus_accounts(emp_cpr_number):
     sql = """
     SELECT
       e.name employee
-    , c.name customer 
+    , c.name customer
     , cpr_number
-    , account_number 
+    , account_number
     FROM manages m
-      NATURAL JOIN accounts  
+      NATURAL JOIN accounts
       NATURAL JOIN customers c
       JOIN employees e ON m.emp_cpr_number = e.id
-	WHERE emp_cpr_number = %s 
+	WHERE emp_cpr_number = %s
     ;
     """
     cur.execute(sql, (emp_cpr_number,))
@@ -190,9 +190,9 @@ def select_emp_cus_accounts(emp_cpr_number):
 def select_investments(CPR_number):
     cur = conn.cursor()
     sql = """
-    SELECT i.account_number, a.cpr_number, a.created_date 
+    SELECT i.account_number, a.cpr_number, a.created_date
     FROM investmentaccounts i
-    JOIN accounts a ON i.account_number = a.account_number    
+    JOIN accounts a ON i.account_number = a.account_number
     WHERE a.cpr_number = %s
     """
     cur.execute(sql, (CPR_number,))
@@ -204,10 +204,10 @@ def select_investments_with_certificates(CPR_number):
     cur = conn.cursor()
     sql = """
     SELECT i.account_number, a.cpr_number, a.created_date
-    , cd.cd_number, start_date, maturity_date, rate, amount 
+    , cd.cd_number, start_date, maturity_date, rate, amount
     FROM investmentaccounts i
     JOIN accounts a ON i.account_number = a.account_number
-    JOIN certificates_of_deposit cd ON i.account_number = cd.account_number    
+    JOIN certificates_of_deposit cd ON i.account_number = cd.account_number
     WHERE a.cpr_number = %s
     """
     cur.execute(sql, (CPR_number,))
