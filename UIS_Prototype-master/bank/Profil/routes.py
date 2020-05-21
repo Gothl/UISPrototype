@@ -6,9 +6,9 @@ from bank.models import CheckingAccount, InvestmentAccount, update_CheckingAccou
 from bank.models import select_investments_with_certificates, select_investments, select_investments_certificates_sum
 import sys, datetime
 
-Customer = Blueprint('Customer', __name__)
+Profil = Blueprint('Profil', __name__)
 
-@Customer.route("/invest", methods=['GET', 'POST'])
+@Profil.route("/invest", methods=['GET', 'POST'])
 def invest():
     if not current_user.is_authenticated:
         flash('Please Login.','danger')
@@ -19,9 +19,9 @@ def invest():
     investment_sums = select_investments_certificates_sum(current_user.get_id())
     return render_template('invest.html', title='Investments', inv_cd_list=investment_certificates
     , inv_sums=investment_sums)
-    
 
-@Customer.route("/deposit", methods=['GET', 'POST'])
+
+@Profil.route("/deposit", methods=['GET', 'POST'])
 def deposit():
     if not current_user.is_authenticated:
         flash('Please Login.','danger')
@@ -35,7 +35,7 @@ def deposit():
         return redirect(url_for('Login.home'))
     return render_template('deposit.html', title='Deposit', form=form)
 
-@Customer.route("/summary", methods=['GET', 'POST'])
+@Profil.route("/summary", methods=['GET', 'POST'])
 def summary():
     if not current_user.is_authenticated:
         flash('Please Login.','danger')
@@ -45,5 +45,3 @@ def summary():
         flash('Succeed!', 'success')
         return redirect(url_for('Login.home'))
     return render_template('deposit.html', title='Deposit', form=form)
-
-
