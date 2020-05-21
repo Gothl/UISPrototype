@@ -54,7 +54,7 @@ class Diagnoser_allergier(tuple):
         self.diagnose_allergi_navn = user_data[4]
 
 class Indsigelser(tuple):
-    def __init__(self, user_data)
+    def __init__(self, user_data):
 
         self.indsigelses_id = user_data[0]
         self.diagnose_id = user_data[1]
