@@ -117,7 +117,7 @@ CREATE TABLE IF NOT EXISTS Profiler(
 );
 
 CREATE TABLE IF NOT EXISTS Proevesvar(
-    cpr_nr INTEGER REFERENCES Profil(cpr_nr),
+    cpr_nr INTEGER REFERENCES Profiler(cpr_nr),
     proevesvar_id SERIAL PRIMARY KEY,
     dato date,
     afdeling text,
@@ -126,7 +126,7 @@ CREATE TABLE IF NOT EXISTS Proevesvar(
 
 CREATE TABLE IF NOT EXISTS Aftaler(
     aftale_id SERIAL PRIMARY KEY,
-    cpr_nummer INTEGER REFERENCES Profil(cpr_nr),
+    cpr_nummer INTEGER REFERENCES Profiler(cpr_nr),
     dato date,
     afdeling text
 );
@@ -140,13 +140,13 @@ CREATE TABLE IF NOT EXISTS Meddelelser(
 );
 
 CREATE TABLE IF NOT EXISTS Journalnotater(
-    cpr_nr INTEGER REFERENCES Profil(cpr_nr),
+    cpr_nr INTEGER REFERENCES profiler(cpr_nr),
     notat_id SERIAL PRIMARY KEY
 );
 
 CREATE TABLE IF NOT EXISTS Diagnoser_allergier(
     diagnose_id SERIAL PRIMARY KEY,
-    cpr_nr INTEGER REFERENCES Profil(cpr_nr),
+    cpr_nr INTEGER REFERENCES profiler(cpr_nr),
     dato date,
     indsigelse boolean,
     diagnose_allergi_navn text
