@@ -110,7 +110,7 @@ CREATE TABLE IF NOT EXISTS MinSP(
 );
 
 CREATE TABLE IF NOT EXISTS Profiler(
-    cpr_nr SERIAL PRIMARY KEY,
+    cpr_nr INTEGER PRIMARY KEY,
     fornavn varchar,
 	efternavn varchar,
 	e_mail varchar
