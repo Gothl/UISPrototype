@@ -13,13 +13,13 @@ CREATE TABLE IF NOT EXISTS Employees(
     name varchar(20),
     password varchar(120)
 );
--- Solving the accounts ISA Hierachy. 
+-- Solving the accounts ISA Hierachy.
 -- (-)relational style. In this case every entity is implemented
 -- -objects atyle. In this case only typed objects. Implement a type on manages
 -- -nulls style. In this case only accounts
 
 -- Serial this is the account number across the system
--- 
+--
 
 CREATE TABLE IF NOT EXISTS Accounts(
 	account_number SERIAL PRIMARY KEY,
@@ -40,14 +40,14 @@ CREATE TABLE IF NOT EXISTS CheckingAccounts(
 	account_number INTEGER PRIMARY KEY
 );
 
-ALTER TABLE CheckingAccounts ADD CONSTRAINT fk_ChAcc_001 
+ALTER TABLE CheckingAccounts ADD CONSTRAINT fk_ChAcc_001
   FOREIGN KEY (account_number) REFERENCES Accounts(account_number)
 ;
 
 CREATE TABLE IF NOT EXISTS InvestmentAccounts(
 	account_number SERIAL PRIMARY KEY
 );
-ALTER TABLE InvestmentAccounts ADD CONSTRAINT fk_InAcc_001 
+ALTER TABLE InvestmentAccounts ADD CONSTRAINT fk_InAcc_001
   FOREIGN KEY (account_number) REFERENCES Accounts(account_number)
 ;
 
@@ -79,7 +79,7 @@ CREATE TABLE IF NOT EXISTS Deposits(
 );
 
 -- investments
--- Solving the certificate ISA Hierachy. 
+-- Solving the certificate ISA Hierachy.
 -- -relational style. In this case every entity is implemented
 -- -objects atyle. In this case only typed objects.
 -- (-)nulls style. In this case only one certificate entity set
@@ -98,10 +98,10 @@ COMMENT ON COLUMN Certificates_of_deposit.rate IS 'at fixed rate certificated´s
 CREATE OR REPLACE VIEW vw_cd_sum
 AS
 SELECT i.account_number, a.cpr_number, a.created_date
-    , sum (amount) 
+    , sum (amount)
     FROM investmentaccounts i
     JOIN accounts a ON i.account_number = a.account_number
-    JOIN certificates_of_deposit cd ON i.account_number = cd.account_number   
+    JOIN certificates_of_deposit cd ON i.account_number = cd.account_number
 GROUP BY  i.account_number, a.cpr_number, a.created_date;
 
 --########
@@ -109,11 +109,11 @@ CREATE TABLE IF NOT EXISTS MinSP(
     versions_id SERIAL PRIMARY KEY
 );
 
-CREATE TABLE IF NOT EXISTS Profil(
+CREATE TABLE IF NOT EXISTS Profiler(
     cpr_nr SERIAL PRIMARY KEY,
     fornavn varchar,
-	efternavn varchar,
-	e_mail varchar
+		efternavn varchar,
+		e_mail varchar
 );
 
 CREATE TABLE IF NOT EXISTS Proevesvar(
