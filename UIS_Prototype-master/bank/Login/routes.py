@@ -1,8 +1,8 @@
 from flask import render_template, url_for, flash, redirect, request, Blueprint
 from bank import app, conn, bcrypt
-from bank.forms import ProfilLoginForm
+from bank.forms import ProfilLoginForm, EmployeeLoginForm, CustomerLoginForm
 from flask_login import login_user, current_user, logout_user, login_required
-from bank.models import Profil, select_profil
+from bank.models import Profiler, Customers, select_Profiler, select_Employees, select_Customers
 
 Login = Blueprint('Login', __name__)
 
@@ -25,17 +25,22 @@ def login():
     if current_user.is_authenticated:
         return redirect(url_for('Login.home'))
     #is_employee = True if request.args.get('is_employee') == 'true' else False
+    #form = EmployeeLoginForm() if is_employee else CustomerLoginForm() #ProfilLoginForm()
+    #form = CustomerLoginForm() #ProfilLoginForm()
     form = ProfilLoginForm()
     if form.validate_on_submit():
-        user = select_profil(form.id.data)
-        #user = select_Employees(form.id.data) if is_employee else select_Customers(form.id.data)
-        if user != None and bcrypt.check_password_hash(user[2], form.password.data):
+       # user = select_Profiler(form.id.data)
+        #user = select_Employees(form.id.data) if is_employee else select_Customers(form.id.data) #Profiler(form.id.data)
+        #user = select_Customers(form.id.data) #Profiler(form.id.data)
+        user = Profiler(form.id.data)
+        if user != None and bcrypt.check_password_hash(user[1], form.password.data):
             login_user(user, remember=form.remember.data)
             flash('Login successful.','success')
             next_page = request.args.get('next')
             return redirect(next_page) if next_page else redirect(url_for('Login.home'))
         else:
             flash('Login Unsuccessful. Please check identifier and password', 'danger')
+    #return render_template('login.html', title='Login', is_employee=is_employee, form=form)
     return render_template('login.html', title='Login', form=form)
 
 

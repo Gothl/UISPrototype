@@ -12,11 +12,12 @@ from psycopg2 import sql                    # A module that contains objects and
 def load_user(user_id):
     cur = conn.cursor()
 
-    schema = 'Profiler'                # assuming that the user_id belongs to a customer, to start with
+    #schema = 'customers' #'profiler'                # assuming that the user_id belongs to a customer, to start with
+    schema = 'profiler'                # assuming that the user_id belongs to a customer, to start with
     id = 'cpr_nr'                   # id of the customer will be the 'cpr_number' key attribute
     #if str(user_id).startswith('60'):   # if user_id starts with '60' then it's an employees, logging in.
-    #    schema = 'patienter'            # change to patients schema
-    #    id = 'id'                       # can still be id, but cpr would be more descriptive/accurate.
+     #   schema = 'employees' #schema = 'patienter'            # change to patients schema
+      #  id = 'id'                       # can still be id, but cpr would be more descriptive/accurate.
 
     # user_sql = SELECT * FROM 'customers/employees' WHERE 'cpr_number' = %s
     # the triple-quotes are a way to allow the query to be written using multiple lines. With single-quotes the query needs to be on one line.
@@ -30,23 +31,24 @@ def load_user(user_id):
     if cur.rowcount > 0:                        # if the query returns at least one row.
         # return an Employee (se class below) if schema=='employees' else return a customer.
         # fetchone returns the next row of the result
-        return Profil(cur.fetchone())
+        #return Employees(cur.fetchone()) if schema == 'employees' else Customers(cur.fetchone()) #Profiler(cur.fetchone())
+        return Profiler(cur.fetchone())
     else:
         return None                             # if the command returns 0 rows.
-class Profil(tuple, UserMixin):
-    def __init__(self, user_data):
 
+class Profiler(tuple, UserMixin):
+    def __init__(self, user_data):
         self.cpr_nr = user_data[0]
-        self.fornavn = user_data[1]
-        self.efternavn = user_data[2]
-        self.mail = user_data[3]
+        self.password = user_data[1]
+        self.fornavn = user_data[2]
+        self.efternavn = user_data[3]
+        self.mail = user_data[4]
 
     def get_id(self):                           # defines/overrides a get func that returns the customer's cpr_number
        return (self.cpr_nr)
 
 class Diagnoser_allergier(tuple):
     def __init__(self, user_data):
-
         self.diagnose_id = user_data[0]
         self.cpr_nr = user_data[1]
         self.dato = user_data[2]
@@ -55,7 +57,6 @@ class Diagnoser_allergier(tuple):
 
 class Indsigelser(tuple):
     def __init__(self, user_data):
-
         self.indsigelses_id = user_data[0]
         self.diagnose_id = user_data[1]
         self.dato = user_data[2]
@@ -123,7 +124,7 @@ def insert_Customers(name, CPR_number, password):   # inserts a Customer with va
     conn.commit()                                   # commit() commits any pending transactions to the db. Without it changes would be lost.
     cur.close()                                     # closes the cursor, making it unusable from this point on.
 
-def select_profil(cpr_nr):                   # selects a specific Customer, based on their cpr-number
+def select_Profiler(cpr_nr):                   # selects a specific Customer, based on their cpr-number
     cur = conn.cursor()                             # same process, except...
     sql = """
     SELECT * FROM Profiler
@@ -131,6 +132,17 @@ def select_profil(cpr_nr):                   # selects a specific Customer, base
     """
     cur.execute(sql, (cpr_nr,))                 # ... after execution the changes are not committed, but instead used in the statement below
     user = Profiler(cur.fetchone()) if cur.rowcount > 0 else None;     # sets 'user' to the customer matching the cpr-number (if any), else user = None.
+    cur.close()
+    return user                                     # this is self-explanatory
+
+def select_Customers(CPR_number):                   # selects a specific Customer, based on their cpr-number
+    cur = conn.cursor()                             # same process, except...
+    sql = """
+    SELECT * FROM Customers
+    WHERE cpr_number = %s
+    """
+    cur.execute(sql, (CPR_number,))                 # ... after execution the changes are not committed, but instead used in the statement below
+    user = Customers(cur.fetchone()) if cur.rowcount > 0 else None;     # sets 'user' to the customer matching the cpr-number (if any), else user = None.
     cur.close()
     return user                                     # this is self-explanatory
 

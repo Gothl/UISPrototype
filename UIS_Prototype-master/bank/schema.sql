@@ -149,7 +149,7 @@ CREATE TABLE IF NOT EXISTS Diagnoser_allergier(
     diagnose_id SERIAL PRIMARY KEY,
     cpr_nr INTEGER REFERENCES profiler(cpr_nr),
     dato date,
-    indsigelse boolean,
+    indsigelse boolean default false,
     diagnose_allergi_navn text
 );
 

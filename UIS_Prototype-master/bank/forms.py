@@ -19,17 +19,17 @@ class IndsigelsesForm(FlaskForm):
     indsigelse = StringField('Indsigelse:', validators=[DataRequired(), Length(min=2, max=500)])
     submit = SubmitField('Indsend')
 
-#class CustomerLoginForm(FlaskForm):
-#    id = IntegerField('CPR_number', validators=[DataRequired()])
-#    password = PasswordField('Password', validators=[DataRequired()])
-#    remember = BooleanField('Remember Me')
-#    submit = SubmitField('Login')
+class CustomerLoginForm(FlaskForm):
+    id = IntegerField('CPR_number', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    remember = BooleanField('Remember Me')
+    submit = SubmitField('Login')
 
-#class EmployeeLoginForm(FlaskForm):
-#    id = IntegerField('Id', validators=[DataRequired()])
-#    password = PasswordField('Password', validators=[DataRequired()])
-#    remember = BooleanField('Remember Me')
-#    submit = SubmitField('Login')
+class EmployeeLoginForm(FlaskForm):
+    id = IntegerField('Id', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    remember = BooleanField('Remember Me')
+    submit = SubmitField('Login')
 
 class TransferForm(FlaskForm):
     amount = IntegerField('amount',
