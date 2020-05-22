@@ -34,7 +34,7 @@
                     <li><a class="nav-item nav-link" href="{{ url_for('Login.account') }}">Journal</a></li>
 {#                    <li><a class="nav-item nav-link" href="{{ url_for('Employee.transfer') }}">Transfer</a></li>#}
                     <li class="divider"></li>
-                    <li><a class="nav-item nav-link" href="{{ url_for('Profil.invest') }}">Diagnoser og allergier</a></li>
+                    <li><a class="nav-item nav-link" href="{{ url_for('Profil.diagnoser') }}">Diagnoser og allergier</a></li>
                     <li class="divider"></li>
                     {#<li><a class="nav-item nav-link" href="https://www.pgadmin.org">site pgAdmin</a></li>
                     <li><a class="nav-item nav-link" href="http://127.0.0.1:58653/browser/ ">pgAdmin4</a></li>#}
@@ -50,7 +50,7 @@
                 <a class="nav-item nav-link" href="{{ url_for('Login.account') }}">Journal</a>
               {#  <a class="nav-item nav-link" href="{{ url_for('Employee.addcustomer') }}">Add customer</a>
                   <a class="nav-item nav-link" href="{{ url_for('Employee.transfer') }}">Transfer</a> #}
-                <a class="nav-item nav-link" href="{{ url_for('Profil.invest') }}">Diagnoser</a>
+                <a class="nav-item nav-link" href="{{ url_for('Profil.diagnoser') }}">Diagnoser</a>
                 <a class="nav-item nav-link" href="{{ url_for('Login.logout') }}">Log ud</a>
               {% else %}
                 <a class="nav-item nav-link" href="{{ url_for('Login.login') }}">Log ind</a>
@@ -83,7 +83,7 @@
                 <li class="list-group-item list-group-item-light">Prøvesvar</li>
                 <li class="list-group-item list-group-item-light">Meddelelser</li>
                 <li class="list-group-item list-group-item-light">Aftaler</li>
-                <li class="list-group-item list-group-item-light"><a class="nav-item nav-link" href="{{ url_for('Profil.invest') }}">Diagnoser og allergier</a></li>
+                <li class="list-group-item list-group-item-light"><a class="nav-item nav-link" href="{{ url_for('Profil.diagnoser') }}">Diagnoser og allergier</a></li>
               {% else %}
                 <li class="list-group-item list-group-item-light">etc</li>
               {% endif %}
