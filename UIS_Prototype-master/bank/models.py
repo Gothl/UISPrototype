@@ -135,6 +135,35 @@ def select_Profiler(cpr_nr):                   # selects a specific Customer, ba
     cur.close()
     return user                                     # this is self-explanatory
 
+def select_diagnoser(cpr_nr):
+    cur = conn.cursor()
+    sql = """
+    SELECT d.dato, d.diagnose_allergi_navn, d.indsigelse
+    FROM diagnoser_allergier d
+    JOIN profiler p ON d.cpr_nr = p.cpr_nr
+    WHERE d.cpr_nr = %s
+    ORDER BY d.dato ASC
+    """
+    cur.execute(sql, (cpr_nr,))
+    tuple_resultset = cur.fetchall()
+    cur.close()
+    return tuple_resultset
+
+def select_indsigelser(cpr_nr):
+    cur = conn.cursor()
+    sql = """
+    SELECT i.dato, d.diagnose_allergi_navn, i.indsigelses_tekst
+    FROM diagnoser_allergier d
+    JOIN profiler p ON d.cpr_nr = p.cpr_nr
+    JOIN indsigelser i ON d.diagnose_id = i.diagnose_id
+    WHERE d.cpr_nr = %s
+    ORDER BY i.dato ASC
+    """
+    cur.execute(sql, (cpr_nr,))
+    tuple_resultset = cur.fetchall()
+    cur.close()
+    return tuple_resultset
+
 def select_Customers(CPR_number):                   # selects a specific Customer, based on their cpr-number
     cur = conn.cursor()                             # same process, except...
     sql = """

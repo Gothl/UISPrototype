@@ -10,12 +10,11 @@
         <tr>
           <th scope="col">Dato</th>
           <th scope="col">Diagnose</th>
-          <th scope="col">Beskrivelse</th>
           <th scope="col">Indsigelse</th>
         </tr>
       </thead>
       <tbody>
-      {% for n in inv_sums %}
+      {% for n in diagnoser %}
         <tr>
           <th scope="row">{{n[0]}}</th>
           <td>{{n[1]}}</td>
@@ -26,33 +25,28 @@
       </tbody>
     </table>  
   </div>
-{#  <div class="content-section">
-    <p>Allergier:</p>
+  <div class="content-section">
+    <p>Indsigelser:</p>
     <table class="table table-striped">
       <thead>
         <tr>
           <th scope="col">Dato</th>
-          <th scope="col">cd_number</th>
-          <th scope="col">start_date</th>
-          <th scope="col">maturity_date</th>
-          <th scope="col">rate</th>
-          <th scope="col">amount</th>
+          <th scope="col">Diagnose</th>
+          <th scope="col">Kommentar</th>
         </tr>
       </thead>
       <tbody>
-      {% for n in inv_cd_list %}
+      {% for n in inds %}
         <tr>
           <th scope="row">{{n[0]}}</th>
+          <td>{{n[1]}}</td>
+          <td>{{n[2]}}</td>
           <td>{{n[3]}}</td>
-          <td>{{n[4]}}</td>
-          <td>{{n[5]}}</td>
-          <td>{{n[6]}}</td>
-          <td>{{n[7]}}</td>
         </tr>
       {% endfor %}
       </tbody>
     </table>  
-  </div>#}
+  </div>
 
 	
 {% endblock content %}
