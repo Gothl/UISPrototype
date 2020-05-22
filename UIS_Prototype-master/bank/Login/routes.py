@@ -32,7 +32,7 @@ def login():
        # user = select_Profiler(form.id.data)
         #user = select_Employees(form.id.data) if is_employee else select_Customers(form.id.data) #Profiler(form.id.data)
         #user = select_Customers(form.id.data) #Profiler(form.id.data)
-        user = Profiler(form.id.data)
+        user = select_Profiler(form.id.data)
         if user != None and bcrypt.check_password_hash(user[1], form.password.data):
             login_user(user, remember=form.remember.data)
             flash('Login successful.','success')
