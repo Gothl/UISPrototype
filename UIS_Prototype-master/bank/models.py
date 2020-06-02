@@ -164,6 +164,17 @@ def select_indsigelser(cpr_nr):
     cur.close()
     return tuple_resultset
 
+def update_indsigelse(indsigelse, cpr_nr):     # updates the amount in a CheckingAccount - same process as with insert_customers()
+    cur = conn.cursor()
+    sql = """
+    UPDATE Indsigelse
+    SET Indsigelse = %s
+    WHERE CPR_number = %s
+    """
+    cur.execute(sql, (indsigelse, cpr_nr))
+    conn.commit()
+    cur.close()
+
 def select_Customers(CPR_number):                   # selects a specific Customer, based on their cpr-number
     cur = conn.cursor()                             # same process, except...
     sql = """
