@@ -18,8 +18,13 @@
         <tr>
           <th scope="row">{{n[0]}}</th>
           <td>{{n[1]}}</td>
-          <td>{{n[2]}}</td>
-          <td>{{n[3]}}</td>
+            {% if n[2] %}
+                <td>Indsigelse oprettet</td>
+            {% else %}
+                <td>
+                    <input type="button" value="Gør indsigelse" />
+                </td>
+            {% endif %}
         </tr>
       {% endfor %}
       </tbody>
