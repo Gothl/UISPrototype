@@ -4,7 +4,8 @@ This is the shared repo for the UIS group project prototype.
 Nedenfor har jeg lavet en lille guide til at få os i gang. 
 
 Jeg ændringer muligvis løbende i denne i takt med at vores repo ændrer sig.
-
+##Oprettelse af brugeren uisg
+Der kan opstå access-problemer, hvis man forsøger at køre prototypen uden at have oprettet brugeren uisg korrekt (dvs. med all privilegier). Dette kan gøres i terminalern med kommandoer, der virker for nogle og ikke for andre, så en idé er at oprette brugeren vha. pgadmin i stedet. Dette gøres blot ved at vælge create group/role i højrekliksmenuen i groups/roles i pgadmin. Giv navnet 'uisg' og slå alle privilegier til. SÅ simpelt! Herefter skulle du gerne kunne køre prototypen.
 
 ##  How-to: Pulling og kørsel af vores database:
 Oprettelse eller ændring af tabeller (schemas) (f.eks. tabellen patienter) foregår 
