@@ -16,7 +16,7 @@ class ProfilLoginForm(FlaskForm):
     submit = SubmitField('Log in')
 
 class IndsigelsesForm(FlaskForm):
-    indsigelse = StringField('Indsigelse:', validators=[DataRequired(), Length(min=2, max=500)])
+    indsigelsestekst = StringField('Indsigelse:', validators=[DataRequired(), Length(min=2, max=500)])
     submit = SubmitField('Indsend')
 
 class CustomerLoginForm(FlaskForm):
