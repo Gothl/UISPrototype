@@ -16,13 +16,13 @@
       <tbody>
       {% for n in diagnoser %}
         <tr>
-          <th scope="row">{{n[0]}}</th>
-          <td>{{n[1]}}</td>
-            {% if n[2] %}
+          <th scope="row">{{n[1]}}</th>
+          <td>{{n[2]}}</td>
+            {% if n[3] %}
                 <td>Indsigelse oprettet</td>
             {% else %}
                 <td>
-                    <input type="button" value="Gør indsigelse" />
+                    <input type="button" value="Gør indsigelse" onclick= n[0]/> {# Get diagnose-id for routes #}
                 </td>
             {% endif %}
         </tr>
