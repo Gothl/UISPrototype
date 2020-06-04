@@ -16,6 +16,7 @@ class ProfilLoginForm(FlaskForm):
     submit = SubmitField('Log in')
 
 class IndsigelsesForm(FlaskForm):
+    diagnose = SelectField('Diagnose:', choices=[], coerce = int, validators=[DataRequired()])
     indsigelsestekst = StringField('Indsigelse:', validators=[DataRequired(), Length(min=2, max=500)])
     submit = SubmitField('Indsend')
 
@@ -32,7 +33,7 @@ class EmployeeLoginForm(FlaskForm):
     submit = SubmitField('Login')
 
 class TransferForm(FlaskForm):
-    indsigelse = BooleanField('Vil du gøre indsigelse')
+    #indsigelse = BooleanField('Vil du gøre indsigelse')
     amount = IntegerField('amount',
                         validators=[DataRequired()])
     #sourceAccountTest = SelectField('From Account test:', choices=dropdown_choices, validators=[DataRequired()])

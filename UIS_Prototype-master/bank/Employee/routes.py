@@ -52,7 +52,7 @@ def transfer():
         return redirect(url_for('Login.login'))
     CPR_number = current_user.get_id()
     print(CPR_number)
-    dropdown_accounts = select_emp_cus_accounts(current_user.get_id())
+    dropdown_accounts = select_emp_cus_accounts(current_user.get_id()) #select_diagnoser
     drp_accounts = []
     for drp in dropdown_accounts:
         drp_accounts.append((drp[3], drp[1]+' '+str(drp[3])))
@@ -65,7 +65,31 @@ def transfer():
         amount = form.amount.data
         from_account = form.sourceAccount.data
         to_account = form.targetAccount.data
-        transfer_account(date, amount, from_account, to_account)
+        transfer_account(date, amount, from_account, to_account) #update_indsigelser og set_indsigelse_true
         flash('Transfer succeed!', 'success')
         return redirect(url_for('Login.home'))
     return render_template('transfer.html', title='Transfer', drop_cus_acc=dropdown_accounts, form=form)
+
+#select_diagnoser, update_indsigelser, set_indsigelse_true
+@Employee.route("/insigelse", methods=['GET', 'POST'])
+def opret_indsigelse():
+    if not current_user.is_authenticated:
+        flash('Log venligst ind.','danger')
+        return redirect(url_for('Login.login'))
+    CPR_number = current_user.get_id()
+    print(CPR_number)
+    dropdown_diagnoser = select_diagnoser(current_user.get_id()) #select_diagnoser(cpr_nr)= {diagnose_id,  dato, diagnosenavn, indsigelsesbool}
+    drp_diagnoser = []
+    for drp in dropdown_diagnoser:
+        drp_diagnoser.append((drp[0], drp[2]+' '+str(drp[0])))
+    print(drp_diagnoser)
+    form = IndsigelsesForm()
+    form.diagnose.choices = drp_diagnoser
+    if form.validate_on_submit():
+        diagnoseid = form.diagnose.data
+        date = datetime.date.today()
+        tekst = form.indsigelsestekst.data
+        update_indsigelser(diagnoseid, date, tekst) #transfer_account(date, amount, from_account, to_account) #update_indsigelser(diagnose_id, dato, tekst) og set_indsigelse_true(cpr_nr, diagnose-id)
+        flash('Indsigelse oprettet!', 'success')
+        return redirect(url_for('Login.home'))
+    return render_template('indsigelse.html', title='Indsigelse', drop_cus_acc=dropdown_diagnoser, form=form)
