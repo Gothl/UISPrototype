@@ -138,11 +138,11 @@ def select_Profiler(cpr_nr):                   # selects a specific Customer, ba
 def select_diagnoser(cpr_nr):
     cur = conn.cursor()
     sql = """
-    SELECT d.dato, d.diagnose_allergi_navn, d.indsigelse
+    SELECT d.diagnose_id, d.dato, d.diagnose_allergi_navn, d.indsigelse
     FROM diagnoser_allergier d
     JOIN profiler p ON d.cpr_nr = p.cpr_nr
     WHERE d.cpr_nr = %s
-    ORDER BY d.dato ASC
+    ORDER BY d.dato
     """
     cur.execute(sql, (cpr_nr,))
     tuple_resultset = cur.fetchall()
@@ -164,14 +164,37 @@ def select_indsigelser(cpr_nr):
     cur.close()
     return tuple_resultset
 
-def update_indsigelse(indsigelse, cpr_nr):     # updates the amount in a CheckingAccount - same process as with insert_customers()
+def update_indsigelser(diagnoseid, indsigelsesdato, text):
+    cur = conn.cursor()
+    sql ="""
+    INSERT INTO indsigelser (diagnose_id, dato, indsigelses_tekst) 
+    VALUES (%s, %s, %s)
+    ON CONFLICT (diagnose_id) DO 
+    UPDATE SET dato = excluded.dato, indsigelses_tekst = excluded.indsigelses_tekst; 
+    """
+    cur.execute(sql, (diagnoseid, indsigelsesdato, text))                  #excluded refers to rows that created a conflict (here with indsigelses_id) when we tried to insert them.
+    conn.commit()
+    cur.close()
+
+def set_indsigelse_true(cpr_nr, diagnoseid):     # updates the amount in a CheckingAccount - same process as with insert_customers()
     cur = conn.cursor()
     sql = """
-    UPDATE Indsigelse
-    SET Indsigelse = %s
-    WHERE CPR_number = %s
+    UPDATE diagnoser_allergier 
+    SET indsigelse = TRUE
+    WHERE cpr_nr = %s AND diagnose_id = %s;
     """
-    cur.execute(sql, (indsigelse, cpr_nr))
+    cur.execute(sql, (cpr_nr, diagnoseid))
+    conn.commit()
+    cur.close()
+
+def set_indsigelse_false(cpr_nr, diagnoseid):     # updates the amount in a CheckingAccount - same process as with insert_customers()
+    cur = conn.cursor()
+    sql = """
+    UPDATE diagnoser_allergier 
+    SET indsigelse = FALSE
+    WHERE cpr_nr = %s AND diagnose_id = %s;
+    """
+    cur.execute(sql, (cpr_nr, diagnoseid))
     conn.commit()
     cur.close()
 
