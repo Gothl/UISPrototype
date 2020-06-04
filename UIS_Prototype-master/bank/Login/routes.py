@@ -35,11 +35,11 @@ def login():
         user = select_Profiler(form.id.data)
         if user != None and bcrypt.check_password_hash(user[1], form.password.data):
             login_user(user, remember=form.remember.data)
-            flash('Login successful.','success')
+            flash('Log ind var successfuldt.','success')
             next_page = request.args.get('next')
             return redirect(next_page) if next_page else redirect(url_for('Login.home'))
         else:
-            flash('Login Unsuccessful. Please check identifier and password', 'danger')
+            flash('Kunne ikke logge ind. Tjek venligst cpr-nummer og kodeord.', 'danger')
     #return render_template('login.html', title='Login', is_employee=is_employee, form=form)
     return render_template('login.html', title='Login', form=form)
 
