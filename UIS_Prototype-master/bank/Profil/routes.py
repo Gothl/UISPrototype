@@ -5,7 +5,7 @@ from flask_login import current_user
 from bank.models import CheckingAccount, InvestmentAccount, update_CheckingAccount
 from bank.models import select_investments_with_certificates, select_investments, select_investments_certificates_sum, select_diagnoser, select_indsigelser
 import sys, datetime
-from bank.models import Indsigelser, update_indsigelser
+from bank.models import Indsigelser, update_indsigelser, set_indsigelse_true
 
 Profil = Blueprint('Profil', __name__)
 
@@ -53,25 +53,26 @@ def summary():
         return redirect(url_for('Login.home'))
     return render_template('deposit.html', title='Deposit', form=form)
 
-@Profil.route("/indsigelse", methods=['GET', 'POST'])
-def handterIndsigelse():
+@Profil.route("/insigelse", methods=['GET', 'POST'])
+def opret_indsigelse():
     if not current_user.is_authenticated:
         flash('Log venligst ind.','danger')
         return redirect(url_for('Login.login'))
-    indsigelsesform = IndsigelsesForm()
-    if indsigelsesform.validate_on_submit():
-        indsigelse=indsigelsesform.indsigelsestekst.data
-        ny_indsigelse=update_indsigelser(diagnoseid, now(), indsigelse)
-        #indsigelses_id =
-        #cur = conn.cursor()
-        #sql = """
-        #UPDATE Indsigelse
-        #SET Indsigelse = %s
-        #WHERE CPR_number = %s
-        #"""
-        #ur.execute(sql, (diagnose_id, CPR_number))
-        #conn.commit()
-        #cur.close()
-        #flash('Transfer succeed!', 'success')
+    CPR_number = current_user.get_id()
+    print(CPR_number)
+    dropdown_diagnoser = select_diagnoser(current_user.get_id()) #select_diagnoser(cpr_nr)= {diagnose_id,  dato, diagnosenavn, indsigelsesbool}
+    drp_diagnoser = []
+    for drp in dropdown_diagnoser:
+        drp_diagnoser.append((drp[0], drp[2]+' '+str(drp[0])))
+    print(drp_diagnoser)
+    form = IndsigelsesForm()
+    form.diagnose.choices = drp_diagnoser
+    if form.validate_on_submit():
+        diagnoseid = form.diagnose.data
+        date = datetime.date.today()
+        tekst = form.indsigelsestekst.data
+        update_indsigelser(diagnoseid, date, tekst) #update_indsigelser(diagnose_id, dato, tekst) og set_indsigelse_true(cpr_nr, diagnose-id)
+        set_indsigelse_true(current_user.get_id(), diagnoseid)
+        flash('Indsigelse oprettet!', 'success')
         return redirect(url_for('Login.home'))
-    return render_template('indsigelse.html', title='Indsigelse', form=indsigelsesform, )
+    return render_template('indsigelse.html', title='Indsigelse', drop_cus_acc=dropdown_diagnoser, form=form)
