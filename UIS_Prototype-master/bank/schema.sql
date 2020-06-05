@@ -146,7 +146,7 @@ CREATE TABLE IF NOT EXISTS Journalnotater(
 );
 
 CREATE TABLE IF NOT EXISTS Diagnoser_allergier(
-    _id SERIAL PRIMARY KEY,
+    diagnose_id SERIAL PRIMARY KEY,
     cpr_nr INTEGER REFERENCES profiler(cpr_nr),
     dato date,
     indsigelse boolean default false,
