@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, IntegerField, SelectField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, IntegerField, SelectField, TextAreaField
 from wtforms.validators import DataRequired, Length, EqualTo, ValidationError
 class AddCustomerForm(FlaskForm):
     username = StringField('Username',
@@ -17,7 +17,7 @@ class ProfilLoginForm(FlaskForm):
 
 class IndsigelsesForm(FlaskForm):
     diagnose = SelectField('Diagnose:', choices=[], coerce = int, validators=[DataRequired()])
-    indsigelsestekst = StringField('Indsigelse:', validators=[DataRequired(), Length(min=2, max=500)])
+    indsigelsestekst = TextAreaField('Beskriv hvorfor diagnosen er fejlagtig:', validators=[DataRequired(), Length(min=2, max=500)])
     submit = SubmitField('Indsend')
 
 class CustomerLoginForm(FlaskForm):
