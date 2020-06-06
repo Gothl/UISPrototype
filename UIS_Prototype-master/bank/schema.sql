@@ -154,8 +154,8 @@ CREATE TABLE IF NOT EXISTS Diagnoser_allergier(
 );
 
 CREATE TABLE IF NOT EXISTS Indsigelser(
-    indsigelses_id SERIAL PRIMARY KEY,
-    diagnose_id INTEGER REFERENCES diagnoser_allergier(diagnose_id),
+    indsigelses_id SERIAL,
+    diagnose_id INTEGER PRIMARY KEY REFERENCES diagnoser_allergier(diagnose_id),
     dato date,
     indsigelses_tekst text
 );
