@@ -157,13 +157,15 @@ def select_indsigelser(cpr_nr):
     JOIN profiler p ON d.cpr_nr = p.cpr_nr
     JOIN indsigelser i ON d.diagnose_id = i.diagnose_id
     WHERE d.cpr_nr = %s
-    ORDER BY i.dato ASC
+    ORDER BY i.dato
     """
     cur.execute(sql, (cpr_nr,))
     tuple_resultset = cur.fetchall()
     cur.close()
     return tuple_resultset
 
+#indsigelses_id er ikke nok, da disse bliver dynamisk oprettet ved hver insert (vi vil derfor aldrig komme til at opdatere en indsigelse)
+#Hvis vi sætter p_key til diagnose_id vil der altid kun være en indsigelse pr. diagnose ad gangen) <- did this, which fixed it.
 def update_indsigelser(diagnoseid, indsigelsesdato, text):
     cur = conn.cursor()
     sql ="""
@@ -172,7 +174,7 @@ def update_indsigelser(diagnoseid, indsigelsesdato, text):
     ON CONFLICT (diagnose_id) DO 
     UPDATE SET dato = excluded.dato, indsigelses_tekst = excluded.indsigelses_tekst; 
     """
-    cur.execute(sql, (diagnoseid, indsigelsesdato, text))                  #excluded refers to rows that created a conflict (here with indsigelses_id) when we tried to insert them.
+    cur.execute(sql, (diagnoseid, indsigelsesdato, text))  #excluded refers to rows that created a conflict (here with indsigelses_id) when we tried to insert them.
     conn.commit()
     cur.close()
 
