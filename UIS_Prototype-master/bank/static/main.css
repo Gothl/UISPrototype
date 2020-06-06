@@ -59,7 +59,9 @@ h3, h4, h5, h6 {
   color: #444444;
 }
 
-a.article-title:hover {
+#textbox {font-size: 10px;}
+
+.article-title:hover {
   color: #444444;
   text-decoration: none;
 }
