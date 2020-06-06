@@ -1,6 +1,10 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h1>{{ current_user.name }}</h1>
+    {% if current_user.is_authenticated %}
+    <h1>{{ "Velkommen, "+ current_user.fornavn }}</h1>
+    {% else %}
+    <h1>{{ "Velkommen til MinSP" }}</h1>
+    {% endif %}
     {% for post in posts %}
         <article class="media content-section">
           <div class="media-body">
