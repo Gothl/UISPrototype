@@ -1,10 +1,11 @@
 {% extends "layout_acc.html" %}
 {% block content %}
-    <h1>{{ current_user.name }}</h1>
-	
+    <h2>Diagnoser og allergier</h2>
+    <p>Her kan du se dine diagnoser og allergier (hvis du har nogen). Du kan desuden gøre indsigelse mod eventuelle fejldiagnoser ved at vælge "Gør indsigelse".</p>
+
 
   <div class="content-section">	
-    <p>Diagnoser:</p>
+    <h5>Dine diagnoser:</h5>
     <table class="table table-striped">
       <thead>
         <tr>
@@ -22,8 +23,8 @@
                 <td>Indsigelse oprettet</td>
             {% else %}
                 <td>
-                    <input type="button" value="Gør indsigelse" onclick= href ="{{ url_for('Profil.indsigelse') }}"/> {# Get diagnose-id for routes #}
-                    
+                <a class="nav-item nav-link" href="{{ url_for('Profil.indsigelse') }}">Gør indsigelse</a></li>
+{#                    <input type="button" value="Gør indsigelse" onclick= "{{ url_for('Profil.indsigelse') }}"/>#}
                 </td>
             {% endif %}
         </tr>
@@ -32,7 +33,7 @@
     </table>  
   </div>
   <div class="content-section">
-    <p>Indsigelser:</p>
+    <h4>Dine aktive indsigelser:</h4>
     <table class="table table-striped">
       <thead>
         <tr>
