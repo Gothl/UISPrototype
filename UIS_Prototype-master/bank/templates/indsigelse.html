@@ -1,0 +1,46 @@
+{% extends "layout_acc.html" %}
+{% block content %}
+    <h2>Gør indsigelse mod en diagnose</h2>
+    <p>Her kan du let gøre indsigelse mod en fejldiagnose. Vælg blot diagnosen og skriv en begrundelse i tekstfeltet for hvorfor diagnosen er fejlagtig.</p>
+    <p>Hvis der allerede findes en indsigelse mod diagnosen vil denne blive overskrevet. Du kan således rette i indsigelser, men ikke slette dem, når først de er oprettet.</p>
+    <p>Ønsker du derfor at slette en indsigelse kan du bede om det i en ny indsigelse.</p>
+    <div class="content-section">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+              {{ form.diagnose.label(class="form-control-label") }}
+              {{ form.diagnose(class="form-control") }}
+            </div>
+            <fieldset class="form-group">
+                <div class="form-group">
+                    {{ form.indsigelsestekst.label(class="form-control-label") }}
+                    {% if form.indsigelsestekst.errors %}
+                        {{ form.indsigelsestekst(class="form-control form-control-lg is-invalid", id='textbox') }}
+                        <div class="invalid-feedback">
+                            {% for error in form.password.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.indsigelsestekst(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+        </form>
+    </div>
+	{#
+    <div class="content-section">	
+      <p>dropdown customer account tuples:</p>
+      <ul class="list-group">
+        {% for n in drop_diagnoser %}
+        <li class="list-group-item list-group-item-light">{{n}}}</li>
+        {% endfor %}
+      </ul>
+      <br>
+      <p>Same list with a filter: {{ drop_diagnoser|join(', ') }}</p>
+    </div>#}
+	
+{% endblock content %}
