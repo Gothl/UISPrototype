@@ -116,7 +116,7 @@ INSERT INTO public.profiler(cpr_nr, password, fornavn, efternavn, e_mail) VALUES
 INSERT INTO public.profiler(cpr_nr, password, fornavn, efternavn, e_mail) VALUES (1234567894, '$2b$12$KFkp1IEMGT4QrWwjPGhE3ejOv6Z3pYhx/S4qOoFbanR2sMiZqgeJO', 'Barbie', 'Plastik', 'BarbieQueeeen@gmail.com');
 
 --Diagnoser
-INSERT INTO public.diagnoser_allergier(diagnose_id, cpr_nr, dato, indsigelse, diagnose_allergi_navn) VALUES (78903, 1234567890, '2020-05-15', FALSE, 'COVID-19');
+INSERT INTO public.diagnoser_allergier(diagnose_id, cpr_nr, dato, indsigelse, diagnose_allergi_navn) VALUES (78903, 1234567890, '2020-05-15', FALSE, 'COVID-19'); --Diagnose_id + cpr =primary key
 INSERT INTO public.diagnoser_allergier(diagnose_id, cpr_nr, dato, indsigelse, diagnose_allergi_navn) VALUES (78901, 1234567890, '2020-04-01', TRUE, 'Forhøjet blodtryk');
 INSERT INTO public.diagnoser_allergier(diagnose_id, cpr_nr, dato, indsigelse, diagnose_allergi_navn) VALUES (78902, 1234567890, '2020-05-01', FALSE, 'Slidgigt');
 

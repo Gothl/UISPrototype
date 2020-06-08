@@ -105,9 +105,6 @@ SELECT i.account_number, a.cpr_number, a.created_date
 GROUP BY  i.account_number, a.cpr_number, a.created_date;
 
 --########
-CREATE TABLE IF NOT EXISTS MinSP(
-    versions_id SERIAL PRIMARY KEY
-);
 
 CREATE TABLE IF NOT EXISTS Profiler(
     cpr_nr INTEGER PRIMARY KEY,
@@ -121,7 +118,7 @@ CREATE TABLE IF NOT EXISTS Proevesvar(
     cpr_nr INTEGER REFERENCES Profiler(cpr_nr),
     proevesvar_id SERIAL PRIMARY KEY,
     dato date,
-    afdeling text,
+    afdelings_id INTEGER,
     resultat text
 );
 
@@ -129,20 +126,21 @@ CREATE TABLE IF NOT EXISTS Aftaler(
     aftale_id SERIAL PRIMARY KEY,
     cpr_nummer INTEGER REFERENCES Profiler(cpr_nr),
     dato date,
-    afdeling text
+    afdelings_id INTEGER
 );
 
 CREATE TABLE IF NOT EXISTS Meddelelser(
     dato date,
-    afdeling text ,
     medd_id SERIAL PRIMARY KEY,
-    afsender text,
-    modtager text
+    afsender INTEGER,
+    modtager INTEGER,
+    medd_tekst text
 );
 
 CREATE TABLE IF NOT EXISTS Journalnotater(
     cpr_nr INTEGER REFERENCES profiler(cpr_nr),
-    notat_id SERIAL PRIMARY KEY
+    notat_id SERIAL PRIMARY KEY,
+    notat text
 );
 
 CREATE TABLE IF NOT EXISTS Diagnoser_allergier(
@@ -154,7 +152,7 @@ CREATE TABLE IF NOT EXISTS Diagnoser_allergier(
 );
 
 CREATE TABLE IF NOT EXISTS Indsigelser(
-    indsigelses_id SERIAL,
+    --indsigelses_id SERIAL,
     diagnose_id INTEGER PRIMARY KEY REFERENCES diagnoser_allergier(diagnose_id),
     dato date,
     indsigelses_tekst text
