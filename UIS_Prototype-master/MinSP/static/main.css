@@ -1,0 +1,77 @@
+body {
+  background: #fafafa;
+  color: #333333;
+  margin-top: 5rem;
+}
+
+title, h1, h2, h3, h4, h5, h6 {
+  color: #1a1e6d;
+}
+
+.bg-steel {
+  background-color: #909090;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #ffffff;
+  min-width: 300px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a{
+  color: #444444;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a.inactive {
+  color: #909090;
+}
+
+.dropdown-content a.inactive:hover {
+  color: #909090;
+  font-weight: normal;
+}
+
+.dropdown-content a:hover {
+  color: #1a1e6d;
+  font-weight: 500;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.site-header .navbar-brand .mr-4{
+  color: #1a1e6d;
+}
+
+.site-header .navbar-nav .nav-link {
+  color: #444444;
+}
+
+.site-header .navbar-nav .nav-link:hover {
+  color: #1a1e6d;
+}
+
+.site-header .navbar-nav .nav-link.active {
+  font-weight: 800;
+}
+
+.content-section {
+  background: #ffffff;
+  padding: 10px 20px;
+  border: 1px solid #dddddd;
+  border-radius: 3px;
+  margin-bottom: 20px;
+}
+
+.article-title {
+  color: #444444;
+}
+
+#textbox {font-size: 10px;}
