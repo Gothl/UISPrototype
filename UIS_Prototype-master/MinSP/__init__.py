@@ -6,7 +6,7 @@ from flask_login import LoginManager
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'fc089b9218301ad987914c53481bff04'
 # set your own database
-db = "dbname='bank' user='uisg' host='localhost' password = 'UIS'"
+db = "dbname='MinSP' user='uisg' host='localhost' password = 'UIS'"
 conn = psycopg2.connect(db)
 
 bcrypt = Bcrypt(app)
@@ -14,11 +14,9 @@ login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 login_manager.login_message_category = 'info'
 
-from bank.Login.routes import Login
-from bank.Profil.routes import Profil
-from bank.Employee.routes import Employee
+from MinSP.Login.routes import Login
+from MinSP.Profil.routes import Profil
 app.register_blueprint(Login)
 app.register_blueprint(Profil)
-app.register_blueprint(Employee)
 
-#from bank import routes
+#from MinSP import routes
