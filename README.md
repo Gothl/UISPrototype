@@ -22,24 +22,24 @@ skal filerne schema.sql og derefter schema_ins.sql derfor køres igen.
 
 Klon git-repo'et til en lokal mappe på din computer (hvis du ikke allerede har gjort det).
 
-Gå til din klonede UIS_prototype-master/bank mappe i terminalen. 
+Gå til din klonede UIS_prototype-master/MinSP mappe i terminalen. 
 
 Fetch og pull de seneste ændringer fra github.
 
 Kør herefter følgende (hvor \<username\> self. erstattes af dit brugernavn):
 
->psql -d bank -U \<username> -f schema.sql 
+>psql -d MinSP -U \<username> -f schema.sql 
 
 for at oprette tabellerne/skemaerne, efterfulgt af 
 
->psql -d bank -U \<username> -f schema_ins.sql 
+>psql -d MinSP -U \<username> -f schema_ins.sql 
 
 for at udfylde dem med data.
 
 ---
-######Tjek ændringerne i pgAdmin, ELLER i terminalen ved først at logge ind på bank databasen med kommandoen:
+######Tjek ændringerne i pgAdmin, ELLER i terminalen ved først at logge ind på MinSP databasen med kommandoen:
 
->psql -d bank -U \<username> 
+>psql -d MinSP -U \<username> 
 
 For at tjekke ændringerne fra github nu også er implementeret i din kopi af databasen, 
 kan du f.eks. herefter indtaste et PostgreSQL statement i stil med 
@@ -47,7 +47,7 @@ kan du f.eks. herefter indtaste et PostgreSQL statement i stil med
 >SELECT * FROM accounts;  
 >//(i tilfælde af at ændringen var i accounts)
 
-i bank ( dvs.: bank=# SELECT * FROM accounts;).
+i MinSP ( dvs.: MinSP=# SELECT * FROM accounts;).
 
 ######Tjek ændringer i hjemmesiden
 Kør 
