@@ -1,0 +1,8 @@
+{% extends "layout.html" %}
+{% block content %}
+    {% if current_user.is_authenticated %}
+    <h1>{{ "Velkommen, "+ current_user.fornavn }}</h1>
+    {% else %}
+    <h1>{{ "Velkommen til MinSP" }}</h1>
+    {% endif %}
+{% endblock content %}
