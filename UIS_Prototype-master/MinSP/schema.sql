@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS Profiler(
 );
 
 CREATE TABLE IF NOT EXISTS Proevesvar(
-    cpr_nr INTEGER REFERENCES Profiler(cpr_nr) NOT NULL ON DELETE CASCADE,
+    cpr_nr INTEGER REFERENCES Profiler(cpr_nr) NOT NULL  ,
     proevesvar_id SERIAL PRIMARY KEY NOT NULL,
     dato date NOT NULL,
     afdelings_id INTEGER NOT NULL,
@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS Proevesvar(
 
 CREATE TABLE IF NOT EXISTS Aftaler(
     aftale_id SERIAL PRIMARY KEY NOT NULL,
-    cpr_nummer INTEGER REFERENCES Profiler(cpr_nr) NOT NULL ON DELETE CASCADE,
+    cpr_nummer INTEGER REFERENCES Profiler(cpr_nr) NOT NULL  ,
     dato date NOT NULL,
     afdelings_id INTEGER NOT NULL
 );
@@ -32,14 +32,14 @@ CREATE TABLE IF NOT EXISTS Meddelelser(
 );
 
 CREATE TABLE IF NOT EXISTS Journalnotater(
-    cpr_nr INTEGER REFERENCES profiler(cpr_nr) NOT NULL ON DELETE CASCADE,
+    cpr_nr INTEGER REFERENCES profiler(cpr_nr) NOT NULL  ,
     notat_id SERIAL PRIMARY KEY NOT NULL,
     notat text NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Diagnoser_allergier(
     diagnose_id SERIAL PRIMARY KEY NOT NULL,
-    cpr_nr INTEGER REFERENCES profiler(cpr_nr) NOT NULL ON DELETE CASCADE,
+    cpr_nr INTEGER REFERENCES profiler(cpr_nr) NOT NULL  ,
     dato date NOT NULL,
     indsigelse boolean default false NOT NULL,
     diagnose_allergi_navn text NOT NULL
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS Diagnoser_allergier(
 
 CREATE TABLE IF NOT EXISTS Indsigelser(
     --indsigelses_id SERIAL NOT NULL,
-    diagnose_id INTEGER PRIMARY KEY REFERENCES diagnoser_allergier(diagnose_id) NOT NULL ON DELETE CASCADE,
+    diagnose_id INTEGER PRIMARY KEY REFERENCES diagnoser_allergier(diagnose_id) NOT NULL  ,
     dato date NOT NULL,
     indsigelses_tekst text NOT NULL
 );
