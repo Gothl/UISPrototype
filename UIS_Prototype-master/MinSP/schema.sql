@@ -1,53 +1,53 @@
 \i schema_drop.sql
 
 CREATE TABLE IF NOT EXISTS Profiler(
-    cpr_nr INTEGER PRIMARY KEY,
-    password varchar(120),
-    fornavn varchar,
-	efternavn varchar,
+    cpr_nr INTEGER PRIMARY KEY NOT NULL,
+    password varchar(120) NOT NULL,
+    fornavn varchar NOT NULL,
+	efternavn varchar NOT NULL,
 	e_mail varchar
 );
 
 CREATE TABLE IF NOT EXISTS Proevesvar(
-    cpr_nr INTEGER REFERENCES Profiler(cpr_nr),
-    proevesvar_id SERIAL PRIMARY KEY,
-    dato date,
-    afdelings_id INTEGER,
-    resultat text
+    cpr_nr INTEGER REFERENCES Profiler(cpr_nr) NOT NULL ON DELETE CASCADE,
+    proevesvar_id SERIAL PRIMARY KEY NOT NULL,
+    dato date NOT NULL,
+    afdelings_id INTEGER NOT NULL,
+    resultat text NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Aftaler(
-    aftale_id SERIAL PRIMARY KEY,
-    cpr_nummer INTEGER REFERENCES Profiler(cpr_nr),
-    dato date,
-    afdelings_id INTEGER
+    aftale_id SERIAL PRIMARY KEY NOT NULL,
+    cpr_nummer INTEGER REFERENCES Profiler(cpr_nr) NOT NULL ON DELETE CASCADE,
+    dato date NOT NULL,
+    afdelings_id INTEGER NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Meddelelser(
-    dato date,
-    medd_id SERIAL PRIMARY KEY,
-    afsender INTEGER,
-    modtager INTEGER,
-    medd_tekst text
+    dato date NOT NULL,
+    medd_id SERIAL PRIMARY KEY NOT NULL,
+    afsender INTEGER NOT NULL,
+    modtager INTEGER NOT NULL,
+    medd_tekst text NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Journalnotater(
-    cpr_nr INTEGER REFERENCES profiler(cpr_nr),
-    notat_id SERIAL PRIMARY KEY,
-    notat text
+    cpr_nr INTEGER REFERENCES profiler(cpr_nr) NOT NULL ON DELETE CASCADE,
+    notat_id SERIAL PRIMARY KEY NOT NULL,
+    notat text NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Diagnoser_allergier(
-    diagnose_id SERIAL PRIMARY KEY,
-    cpr_nr INTEGER REFERENCES profiler(cpr_nr),
-    dato date,
-    indsigelse boolean default false,
-    diagnose_allergi_navn text
+    diagnose_id SERIAL PRIMARY KEY NOT NULL,
+    cpr_nr INTEGER REFERENCES profiler(cpr_nr) NOT NULL ON DELETE CASCADE,
+    dato date NOT NULL,
+    indsigelse boolean default false NOT NULL,
+    diagnose_allergi_navn text NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Indsigelser(
-    --indsigelses_id SERIAL,
-    diagnose_id INTEGER PRIMARY KEY REFERENCES diagnoser_allergier(diagnose_id),
-    dato date,
-    indsigelses_tekst text
+    --indsigelses_id SERIAL NOT NULL,
+    diagnose_id INTEGER PRIMARY KEY REFERENCES diagnoser_allergier(diagnose_id) NOT NULL ON DELETE CASCADE,
+    dato date NOT NULL,
+    indsigelses_tekst text NOT NULL
 );
