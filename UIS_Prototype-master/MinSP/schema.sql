@@ -27,17 +27,8 @@ CREATE TABLE IF NOT EXISTS Meddelelser(
     dato date NOT NULL,
     medd_id SERIAL PRIMARY KEY NOT NULL,
     cpr_nr INTEGER REFERENCES Profiler ON DELETE CASCADE NOT NULL,
-    afsender INTEGER NOT NULL,
-    modtager INTEGER NOT NULL,
-    medd_tekst text NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS Meddelelser(
-    dato date NOT NULL,
-    medd_id SERIAL PRIMARY KEY NOT NULL,
-    cpr_nr INTEGER REFERENCES Profiler ON DELETE CASCADE NOT NULL,
-    afsender INTEGER NOT NULL,
-    modtager INTEGER NOT NULL,
+    other_id INTEGER NOT NULL,
+    from_profile boolean NOT NULL,
     medd_tekst text NOT NULL
 );
 
